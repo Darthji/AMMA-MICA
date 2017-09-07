@@ -1,36 +1,46 @@
 #Hands-on Exercise 2
-#---------------Exercise starts-----------------
-# 1. Download a CSV file from OECD, read it and remove the last row
 
-#Start of problem 1
-#Read the OECD file into a data frame
-oecd_csv <- read.csv(file="C:/Users/admin1/Studies/AMMA/DP_LIVE_08072017230634515.csv")
-oecd_scv <- head(oecd_csv,-1)
-#End of problem 1
+#Step 1: Downloading a CSV file from OECD
+#Remove the last row
+
+#Problem 1
+
+#Read the OECD file 
+
+oecdfile_csv <- read.csv(file="C:/Users/admin1/Studies/AMMA/DP_LIVE_08072017230634515.csv")
+oecdfile_scv <- head(oecdfile_csv,-1)
+
+#End of problem
 
 
-# 2. Read 2 tables from Wikipedia and find no of ODIs won by India
-#Start of problem 2
+#Step 2: Read tables Wikipedia
+#Number of ODIs won by India
 
-url = "https://en.wikipedia.org/wiki/India%E2%80%93Pakistan_cricket_rivalry"
+#Problem 2
 
-file=read_html(url)
+Table_url = "https://en.wikipedia.org/wiki/India%E2%80%93Pakistan_cricket_rivalry"
 
-#Parse the HTML file to get the table node and store it in a separate variable
-table=html_nodes(file,"table")
+my_file = read_html(Table_url)
 
-#Store the required table in a separate table variable
-table_final<-html_table(table[2],fill=TRUE)
+#Get table node from HTML file 
 
-#Convert into a data frame for easy access
-table.df <- as.data.frame(table_final)
 
-#View the data frame
-View(table.df)
+my_table=html_nodes(my_file,"table")
 
-ODI_wins = table.df$ODI[3]
+#Save as a different table variable
 
-cat(ODI_wins,"- The number of ODIs won by India")
-#End of problem 2
+my_table1 <- html_table(my_table[2] , fill=TRUE)
 
-#---------------End of exercise-----------------
+#Converting data frame
+
+my_table.df <- as.data.frame(my_table1)
+
+#Viewing data frame
+
+View(my_table.df)
+
+India_ODIwins = my_table.df$ODI[3]
+
+cat(India_ODIwins,"- Total ODIs won by India")
+
+
