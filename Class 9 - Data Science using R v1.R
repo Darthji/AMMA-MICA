@@ -1,6 +1,6 @@
 # Set up working directory
 
-#setwd("C:\\Ram\\R for Data Science\\data")
+#setwd("C:/Users/admin1/Studies/AMMA")
 
 # Read data
 card_balance<- read.csv(file = "card_balance.csv", stringsAsFactors = F)
