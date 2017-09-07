@@ -1,37 +1,43 @@
-#Hand on Exercise - 3
 
-#Create a data frame of "Custs"
-#ID as distinct numerical values
+#Create data frame "Custs"
+
 #Income is normal distribution
-#Mean: 250,000 and SD:75000
+
+#Mean =  250,000 & SD:75000
+
 #Gender 60% are Male in the sample (Hint: runif and ifelse)
-############################################################################################
-
 
 ############################################################################################
-#Code begins here
-#Create a normally distributed variable for the income with specified mean and SD
-n_income=rnorm(10,mean=250000,sd=75000)
 
-n_income
 
-#Create a 'gender' vector with 10 females
-gender=c(rep("F",10))
+#Creating normally distributed variable
+
+ndis_income = rnorm(10,mean=250000,sd=75000)
+
+ndis_income
+
+#Creating a vector of 10 females
+
+female_gender = c(rep("F",10))
 
 i=sample(1:10,10,replace=FALSE)
 
-#Distribution of 60% males and 40% females done below
+#Distribution of males and females done below
+
 for(q in 1:10){
-  if(gender[i[q]] == "F" &&  q <= 4)
+  if(female_gender[i[q]] == "F" &&  q <= 4)
   {
     
   }
   else
-    gender[i[q]] = c("M")
+    female_gender[i[q]] = c("M")
 }
-gender
+female_gender
 
-Custs <-data.frame(ID=1:10,INCOME <- n_income, GENDER = gender)
+#Creating Custs data frame
+
+Custs <- data.frame(ID=1:10,INCOME <- ndis_income, GENDER = female_gender)
+
 View(Custs)
 
-#End-of-exercise
+
