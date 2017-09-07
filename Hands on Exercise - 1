@@ -1,39 +1,41 @@
-### Hands on Exercise 1 ###
+# Hands on Exercise 1 
 
-## Install package data.table ##
+
 install.packages("data.table")
-
-## Install and load package datasets ##
 install.packages("datasets")
 library("datasets")
 
-## use women dataframe ##
+## Using women dataframe ##
+
 View(women)
 womendata <- women
 
-## number of women with height more than average but weight less than average ##
+## number of women with height > average but weight < average 
+
 mean(womendata$height)
 mean(womendata$weight)
 
 womenmorehlessw <- subset(womendata,womendata$height > mean(womendata$height) & womendata$weight < mean(womendata$weight))
+
 nrow(womenmorehlessw)
 
-## Dataframe of 15 Indian cities and their population size (extract data from site link) ##
+# extract data from site link, population data of 15 indian cities
+
 install.packages("rvest")
 library("rvest")
 city_link="http://www.worldatlas.com/articles/the-biggest-cities-in-india.html"
 
-# read html page #
-cityfile= read_html(city_link)
+# Reading the link 
 
-# load node type table #
-citytable=html_nodes(cityfile,"table")
+city1= read_html(city_link)
 
-# load first table amongst table nodes #
-citytable_final<- html_table(citytable[1], fill= TRUE)
+# Loading node type table 
 
-view(citytable_final)
+citytable1=html_nodes(city1,"table")
+citytable1final<- html_table(citytable1[1], fill= TRUE)
+view(citytable1final)
 
-# convert to data frame #
-city_data= as.data.frame(citytable_final)
+# Final conversion to data frame #
+
+city_data= as.data.frame(citytable1final)
 View(city_data)
