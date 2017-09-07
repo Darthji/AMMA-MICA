@@ -1,8 +1,3 @@
-#Hand on Exercise - 6
-#Questions
-
-#Get data from http://stats.espncricinfo.com/ci/content/records/284248.html and wok on the below questions
-
 #Q.1 -> Plot 5 Highest Run across Years
 #Q.2.-> Find highest number of a times a player has become highest run scorer in a calendar year
 #Q.3.->Plot contribution of player country in becoming highest run getters. e.g. 20% Australian players
@@ -10,29 +5,30 @@
 ###########################################################################
 
 install.packages("rlist")
-
-#Load the required packages
 library(XML)
 library(RCurl)
 
-#Store the URL in a variable page_URL
-page_url <- getURL("http://stats.espncricinfo.com/ci/content/records/284248.html")
+#Storing URL
 
-#Read the HTML tables using redHTMLTable function
-tab_html <- readHTMLTable(page_url)
+my_url <- getURL("http://stats.espncricinfo.com/ci/content/records/284248.html")
 
-#Take the data into a new variable 'table'
-table <- tab_html[[1]]
+#Reading HTML tables 
 
-#View the table
-View(table)
+my_html <- readHTMLTable(my_url)
 
-#Top 5 run scorers across the years
-table[with(table, order(Runs, Player)), ] #sort the data according to the number of runs scored
-View(table)
+my_table <- my_html[[1]]
 
-Top_5<-c(as.character(table$Player[1:5]))
-View(Top_5)
+View(my_table)
+
+#Top 5 run scorers by years
+
+my_table[with(my_table, order(Runs, Player)), ] 
+
+View(my_table)
+
+Top5<-c(as.character(my_table$Player[1:5]))
+
+View(Top5)
 
 
 #Highest number of a times a player has become highest run scorer in a calendar year
@@ -40,6 +36,7 @@ View(Top_5)
 #Contribution of a player's country
 
 #First initialize the country's contribution as 0
+
 PAK=0
 AUS=0
 IND=0
@@ -48,44 +45,50 @@ ENG=0
 WI=0
 SA=0
 
-#Loop in the data frame 'table' 
-for(i in 1:nrow(table))
+#Looping data frame 
+
+for(i in 1:nrow(my_table))
 {
-  if(grepl("PAK",table$Player[i])){
+  if(grepl("PAK",my_table$Player[i])){
     PAK=PAK+1
-}else if(grepl("AUS",table$Player[i])){
+}else if(grepl("AUS",my_table$Player[i])){
     AUS=AUS+1
-}else if(grepl("IND",table$Player[i])){
+}else if(grepl("IND",my_table$Player[i])){
     IND=IND+1
-}else if(grepl("SL",table$Player[i])){
+}else if(grepl("SL",my_table$Player[i])){
   SL=SL+1
-}else if(grepl("WI",table$Player[i])){
+}else if(grepl("WI",my_table$Player[i])){
   WI=WI+1
-}else if(grepl("ENG",table$Player[i])){
+}else if(grepl("ENG",my_table$Player[i])){
   ENG=ENG+1
-}else if(grepl("SA",table$Player[i])){
+}else if(grepl("SA",my_table$Player[i])){
   SA=SA+1
 }else{
   NULL}
 }    
     
 #Country contibution 
-PAK_ratio = 100*PAK/nrow(table)
-AUS_ratio = 100*AUS/nrow(table)
-IND_ratio = 100*IND/nrow(table)
-SL_ratio = 100*SL/nrow(table)
-WI_ratio = 100*WI/nrow(table)
-ENG_ratio = 100*ENG/nrow(table)
-SA_ratio = 100*SA/nrow(table)
 
-#Make a vector for countries
-Country <- c('PAK','AUS','IND','SL','WI','ENG','SA')
+PAK_contri = 100*PAK/nrow(my_table)
+AUS_contri = 100*AUS/nrow(my_table)
+IND_contri = 100*IND/nrow(my_table)
+SL_contri = 100*SL/nrow(my_table)
+WI_contri = 100*WI/nrow(my_table)
+ENG_contri = 100*ENG/nrow(my_table)
+SA_contri = 100*SA/nrow(my_table)
 
-#Make a vector for percentages
-percentage <- c(PAK_ratio,AUS_ratio,IND_ratio,SL_ratio,WI_ratio,ENG_ratio,SA_ratio)
+#Making vector for countries
 
-#Make a data frame in order to view each country's contribution  
-contribution <- data.frame(Country,percentage)
-View(contribution)
+Cricket_Country <- c('PAK','AUS','IND','SL','WI','ENG','SA')
 
-#End-of-exercise
+#Making vector country_percentage
+
+country_percentage <- c(PAK_contri,AUS_contri,IND_contri,SL_contri,WI_contri,ENG_contri,SA_contri)
+
+#Making data frame to view each country's contribution  
+
+country_contribution <- data.frame(Cricket_Country,country_percentage)
+
+View(country_contribution)
+
+
